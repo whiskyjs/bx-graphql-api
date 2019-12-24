@@ -1,0 +1,11 @@
+/node_modules
+/dist
+
+.vscode
+.sublime-workspace
+.sublime-project
+.idea
+
+.vagrant
+
+*.log
