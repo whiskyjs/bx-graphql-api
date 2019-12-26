@@ -14,10 +14,13 @@
     "watch": "webpack --watch",
     "test": "jest",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx,.vue src tests",
+    "check": "npm run-script test && npm run-script lint",
     "dev-server": "webpack-dev-server",
     "release": "webpack --config webpack.production.js"
   },
   "dependencies": {
+    "graphiql": "^0.17.5",
+    "graphql": "^14.5.8",
     "jquery": "^3.4.1"
   },
   "devDependencies": {
@@ -25,10 +28,12 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "@types/classnames": "^2.2.9",
+    "@types/core-js": "^2.5.2",
     "@types/jest": "^24.0.19",
     "@types/prop-types": "^15.7.3",
     "@types/react": "^16.9.11",
@@ -43,6 +48,7 @@
     "classnames": "^2.2.6",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
+    "core-js": "^3.6.1",
     "css-loader": "^3.2.0",
     "eslint": "^6.6.0",
     "eslint-plugin-import": "^2.18.2",

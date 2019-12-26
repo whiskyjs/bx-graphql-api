@@ -5,4 +5,4 @@ if (!isset($_SERVER["DOCUMENT_ROOT"]) || !$_SERVER["DOCUMENT_ROOT"]) {
     $GLOBALS["DOCUMENT_ROOT"] = $_SERVER["DOCUMENT_ROOT"];
 }
 
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/autoload.php";

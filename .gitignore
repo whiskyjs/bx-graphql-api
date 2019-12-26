@@ -2,3 +2,8 @@
 /app/src/node_modules
 
 .phpunit.result.cache
+
+.graphqlconfig
+scratch.graphql
+schema.graphql
+config.local.php

@@ -1,0 +1,14 @@
+parameters:
+  tasks:
+    phpunit:
+      always_execute: true
+    phpcs:
+      standard: './phpcs.xml'
+      ignore_patterns: ['./vendor/*', './app/*']
+    phpstan:
+      level: 0
+      ignore_patterns: ['./vendor/*', './app/*']
+      triggered_by: ['php']
+    composer_script:
+      script: check-frontend
+      triggered_by: ['js', 'jsx', 'ts', 'tsx', 'less', 'sass', 'scss', 'css', 'vue', 'json']

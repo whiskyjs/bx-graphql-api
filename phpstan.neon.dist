@@ -5,6 +5,7 @@ parameters:
       - %rootDir%/../../../bootstrap/phpstan.php
       - %rootDir%/../../../install/index.php
   ignoreErrors:
+      - '/Unsafe usage of new static\(\)\./'
       # - '/Function ([^\s]+) not found\./'
       # - '/Instantiated class ([^\s]+) not found\./'
       # - '/Call to static method ([^\s]+) on an unknown class ([^\s]+)\./'

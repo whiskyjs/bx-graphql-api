@@ -1,0 +1,50 @@
+.graphiql-container {
+    min-height: 600px;
+    max-height: 1000px;
+    min-width: calc(100% - 6px);
+    max-width: calc(100% - 6px);
+    border: 1px #ccc solid;
+    resize: vertical;
+
+    .toolbar-button {
+        line-height: 20px;
+    }
+
+    .search-box {
+        max-width: 100%;
+        margin-top: -6px;
+
+        > .search-box-icon {
+            left: 6px;
+            top: -1px
+        }
+
+        > .search-box-clear {
+            top: 6px;
+            right: 7px;
+        }
+
+        > input {
+            padding-top: 8px;
+            text-indent: 8px;
+            height: 28px;
+            border: 1px #ccc solid;
+        }
+    }
+
+    * {
+        font-family: "DejaVu Sans", sans-serif !important;
+    }
+
+    .CodeMirror {
+        * {
+            font-family: "DejaVu Sans Mono", monospace !important;
+        }
+    }
+}
+
+.CodeMirror-info {
+    * {
+        font-family: "DejaVu Sans Mono", monospace !important;
+    }
+}

@@ -1,0 +1,33 @@
+.graphiql-container {
+  min-height: 600px;
+  max-height: 1000px;
+  min-width: calc(100% - 6px);
+  max-width: calc(100% - 6px);
+  border: 1px #ccc solid;
+  resize: vertical; }
+  .graphiql-container .toolbar-button {
+    line-height: 20px; }
+  .graphiql-container .search-box {
+    max-width: 100%;
+    margin-top: -6px; }
+    .graphiql-container .search-box > .search-box-icon {
+      left: 6px;
+      top: -1px; }
+    .graphiql-container .search-box > .search-box-clear {
+      top: 6px;
+      right: 7px; }
+    .graphiql-container .search-box > input {
+      padding-top: 8px;
+      text-indent: 8px;
+      height: 28px;
+      border: 1px #ccc solid; }
+  .graphiql-container * {
+    font-family: "DejaVu Sans", sans-serif !important; }
+  .graphiql-container .CodeMirror * {
+    font-family: "DejaVu Sans Mono", monospace !important; }
+
+.CodeMirror-info * {
+  font-family: "DejaVu Sans Mono", monospace !important; }
+
+
+/*# sourceMappingURL=graphiql.css.map*/

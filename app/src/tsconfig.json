@@ -25,8 +25,8 @@
     "target": "es5",
     "baseUrl": ".",
     "paths": {
-      "@main/*": [
-        "./src/scripts/main/*"
+      "@graphiql/*": [
+        "./src/scripts/graphiql/*"
       ],
       "@std/*": [
         "./src/scripts/std/*"

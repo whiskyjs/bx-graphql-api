@@ -1,6 +1,5 @@
 const {resolve} = require("path");
 const webpack = require("webpack");
-const fs = require("fs");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -11,8 +10,8 @@ const config = {
     context: resolve(__dirname, "src"),
 
     entry: {
-        "main": [
-            "./main.js",
+        "graphiql": [
+            "./graphiql.ts",
         ],
     },
 
@@ -98,7 +97,7 @@ const config = {
 
     output: {
         filename: "js/[name].js",
-	    path: resolve(__dirname, '../dist'),
+        path: resolve(__dirname, "../dist"),
     },
 
     optimization: {
@@ -154,12 +153,12 @@ const config = {
         ],
 
         alias: {
-            "@main": resolve(__dirname, "src/scripts/main"),
+            "@graphiql": resolve(__dirname, "src/scripts/graphiql"),
             "@std": resolve(__dirname, "src/scripts/std"),
             "@styles": resolve(__dirname, "src/styles"),
         },
 
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".css", ".scss", ".less", ".vue"],
+        extensions: [".mjs", ".js", ".jsx", ".ts", ".tsx", ".css", ".scss", ".less", ".vue"],
     },
 };
 

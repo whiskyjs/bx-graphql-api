@@ -19,8 +19,8 @@ test-frontend:
 lint-frontend:
 	composer lint-frontend
 
-check:
-	composer test && composer analyze && composer lint
+check: test analyze lint
 
-check-all:
-	composer test && composer analyze && composer lint && composer test-frontend && composer lint-frontend
+check-frontend: test-frontend lint-frontend
+
+check-all: check check-frontend

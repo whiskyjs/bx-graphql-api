@@ -3,5 +3,6 @@
   <description>PSR-2 для Bitrix</description>
   <rule ref="PSR2">
     <exclude name="Generic.PHP.DisallowShortOpenTag"/>
+    <exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseParenthesis"/>
   </rule>
 </ruleset>
