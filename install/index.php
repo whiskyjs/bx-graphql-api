@@ -4,9 +4,14 @@
 // phpcs:disable Squiz.Classes.ValidClassName.NotCamelCaps
 
 use Bitrix\Main\Application;
+use Bitrix\Main\Config\Option;
 use Bitrix\Main\Context;
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Localization\Loc;
+
+// use HaydenPierce\ClassFinder\ClassFinder;
+
+use WJS\API\GraphQL\Schema\Types\ModuleEventSetInput;
 
 Loc::loadMessages(__FILE__);
 
@@ -54,6 +59,12 @@ class wjs_api extends \CModule
 
         $this->MODULE_NAME = Loc::getMessage("WJS_MODULE_NAME");
         $this->MODULE_DESCRIPTION = Loc::getMessage("WJS_INSTALL_DESCRIPTION");
+
+        $this->PARTNER_NAME = "Александр Селюченко";
+        $this->PARTNER_URI = "https://segfault.pro";
+
+        /** @noinspection PhpIncludeInspection */
+        include_once realpath(__DIR__ . "/../vendor/autoload.php");
     }
 
     /**
@@ -70,9 +81,7 @@ class wjs_api extends \CModule
         RegisterModule($this->MODULE_ID);
 
         /** @noinspection PhpIncludeInspection */
-        $a = realpath(__DIR__ . "/../src/Entities/SubscriberTable.php");
         include_once realpath(__DIR__ . "/../src/Entities/SubscriberTable.php");
-
 
         $db = Application::getConnection();
         $messageEntity = WJS\API\Entities\SubscriberTable::getEntity();
@@ -83,6 +92,12 @@ class wjs_api extends \CModule
             // Таблица уже существует, не делам ничего
             // TODO: Миграции
         }
+
+        // Генерируем псевдоуникальный идентификатор копии, если уже не существует
+        if (!Option::get($this->MODULE_ID, "origin")) {
+            Option::set($this->MODULE_ID, "origin", uniqid("", true));
+        }
+
         return true;
     }
 
@@ -102,6 +117,7 @@ class wjs_api extends \CModule
 
     /**
      * @return bool
+     * @throws Exception
      */
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function InstallEvents(): bool
@@ -124,11 +140,99 @@ class wjs_api extends \CModule
             "onEpilog"
         );
 
+        $this->InstallTraceableEvents();
+
         return true;
     }
 
     /**
+     * @throws Exception
+     */
+    // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    protected function InstallTraceableEvents(): void
+    {
+        // phpcs:enable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+
+        foreach ($this->iterateTraceableEvents() as [$module, $event, $args]) {
+            EventManager::getInstance()->registerEventHandlerCompatible(
+                $module,
+                $event,
+                $this->MODULE_ID,
+                \WJS\API\Handlers\EventMonitor\EventProcessor::class,
+                "handleEvent",
+                100,
+                "",
+                [[
+                    "module" => $module,
+                    "event" => $event,
+                    "args" => $args,
+                ]]
+            );
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    protected function UninstallTraceableEvents(): void
+    {
+        // phpcs:enable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+
+        foreach ($this->iterateTraceableEvents() as [$module, $event, $args]) {
+            EventManager::getInstance()->unRegisterEventHandler(
+                $module,
+                $event,
+                $this->MODULE_ID,
+                \WJS\API\Handlers\EventMonitor\EventProcessor::class,
+                "handleEvent",
+                "",
+                [[
+                    "module" => $module,
+                    "event" => $event,
+                    "args" => $args,
+                ]]
+            );
+        }
+    }
+
+    /**
+     * @return Generator
+     */
+    protected function iterateTraceableEvents(): \Generator
+    {
+        $eventSet = new ModuleEventSetInput();
+
+        foreach ($eventSet->getFields() as $moduleId => $field) {
+            /**
+             * @var \GraphQL\Type\Definition\InputObjectField $field
+             */
+
+            $rootType = $field->getType();
+
+            while (!$rootType instanceof \GraphQL\Type\Definition\EnumType) {
+                $rootType = (function () {
+                    /**
+                     * @var $this GraphQL\Type\Definition\Type
+                     */
+
+                    return $this->ofType;
+                })->bindTo($rootType, get_class($rootType))->call($rootType);
+            }
+
+            foreach ($rootType->getValues() as $enumValue) {
+                /**
+                 * @var \GraphQL\Type\Definition\EnumValueDefinition $enumValue
+                 */
+
+                yield [$moduleId, $enumValue->name, $enumValue->config["args"] ?? []];
+            }
+        }
+    }
+
+    /**
      * @return bool
+     * @throws Exception
      */
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function UnInstallEvents(): bool
@@ -150,6 +254,8 @@ class wjs_api extends \CModule
             \WJS\API\Handlers\Main::class,
             "onEpilog"
         );
+
+        $this->UninstallTraceableEvents();
 
         return true;
     }
@@ -226,6 +332,11 @@ class wjs_api extends \CModule
         return true;
     }
 
+    /**
+     * @throws \Bitrix\Main\ArgumentException
+     * @throws \Bitrix\Main\SystemException
+     * @throws Exception
+     */
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function DoInstall(): void
     {
@@ -247,6 +358,9 @@ class wjs_api extends \CModule
         );
     }
 
+    /**
+     * @throws Exception
+     */
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     public function DoUninstall(): void
     {

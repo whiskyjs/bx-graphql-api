@@ -3,6 +3,7 @@
 namespace WJS\API\GraphQL\Schema\Types;
 
 use Bitrix\Main\Type\DateTime;
+
 use WJS\API\Entities\SubscriberTable;
 use WJS\API\GraphQL\Schema\Type;
 
@@ -24,7 +25,7 @@ class MutationType extends ExtensibleObjectType
                         ],
                         [
                             "name" => "events",
-                            "type" => Type::nonNull(Type::getInstance(ModuleEventSetTypeInput::class)),
+                            "type" => Type::nonNull(Type::getInstance(ModuleEventSetInput::class)),
                         ],
                     ],
                     "resolve" => function (array $data, array $args = [], ?array $context = null): string {
@@ -32,7 +33,7 @@ class MutationType extends ExtensibleObjectType
                         if ($clientRow = SubscriberTable::getByPrimary($args["clientId"])->fetch()) {
                             $result = SubscriberTable::update($clientRow["UUID"], [
                                 "EVENTS" => $args["events"],
-                                "UPDATED_AT" => new DateTime(),
+                                "UPDATED_AT" => time(),
                             ]);
                         } else {
                             $result = SubscriberTable::add([
@@ -41,10 +42,25 @@ class MutationType extends ExtensibleObjectType
                             ]);
                         }
 
-                        // TODO: Здесь же можно удалять неактуальные подключения.
-
                         if (!$result->isSuccess()) {
                             throw new \Error(join("\n", $result->getErrorMessages()));
+                        }
+
+                        return "OK";
+                    }
+                ],
+                "inspectEventsUnsubscribe" => [
+                    "type" => Type::string(),
+                    "args" => [
+                        [
+                            "name" => "clientId",
+                            "type" => Type::nonNull(Type::string()),
+                        ],
+                    ],
+                    "resolve" => function (array $data, array $args = [], ?array $context = null): string {
+                        // Актуализируем запись конкретного клиента
+                        if ($clientRow = SubscriberTable::getByPrimary($args["clientId"])->fetch()) {
+                            SubscriberTable::delete($clientRow["UUID"]);
                         }
 
                         return "OK";

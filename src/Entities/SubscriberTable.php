@@ -2,19 +2,20 @@
 
 namespace WJS\API\Entities;
 
-use Bitrix\Main\Type\DateTime as BxDateTime;
+use Bitrix\Main\Entity\IntegerField;
 use Bitrix\Main\Entity\StringField;
 use Bitrix\Main\Entity\DataManager;
-use Bitrix\Main\Entity\DatetimeField;
 
 class SubscriberTable extends DataManager
 {
+    const INACTIVE_TIMEOUT = 6 * 3600;
+
     /**
      * @return string
      */
     public static function getTableName()
     {
-        return 'wjs_api_subscriber_table';
+        return 'wjs_api_subscribers';
     }
 
     /**
@@ -30,85 +31,19 @@ class SubscriberTable extends DataManager
                 "primary" => true,
             ]),
 
-            new DatetimeField('CREATED_AT', [
+            new IntegerField('CREATED_AT', [
                 'title' => 'Дата первого подключения клиента',
                 'required' => false,
                 'default_value' => function () {
-                    return new BxDateTime();
-                },
-                'validation' => function () {
-                    return [
-                        function ($value) {
-                            if ($value instanceof BxDateTime || $value instanceof \DateTime) {
-                                return true;
-                            }
-
-                            return false;
-                        },
-                    ];
-                },
-                'save_data_modification' => function () {
-                    return [
-                        function ($value) {
-                            if ($value instanceof \DateTime) {
-                                return BxDateTime::createFromPhp($value);
-                            }
-
-                            return $value;
-                        },
-                    ];
-                },
-                'fetch_data_modification' => function () {
-                    return [
-                        function ($value) {
-                            if ($value instanceof BxDateTime) {
-                                return $value->toString();
-                            }
-
-                            return $value;
-                        },
-                    ];
+                    return time();
                 },
             ]),
 
-            new DatetimeField('UPDATED_AT', [
+            new IntegerField('UPDATED_AT', [
                 'title' => 'Дата последнего доступа клиента',
                 'required' => false,
                 'default_value' => function () {
-                    return new BxDateTime();
-                },
-                'validation' => function () {
-                    return [
-                        function ($value) {
-                            if ($value instanceof BxDateTime || $value instanceof \DateTime) {
-                                return true;
-                            }
-
-                            return false;
-                        },
-                    ];
-                },
-                'save_data_modification' => function () {
-                    return [
-                        function ($value) {
-                            if ($value instanceof \DateTime) {
-                                return BxDateTime::createFromPhp($value);
-                            }
-
-                            return $value;
-                        },
-                    ];
-                },
-                'fetch_data_modification' => function () {
-                    return [
-                        function ($value) {
-                            if ($value instanceof BxDateTime) {
-                                return $value->toString();
-                            }
-
-                            return $value;
-                        },
-                    ];
+                    return time();
                 },
             ]),
 
@@ -134,5 +69,27 @@ class SubscriberTable extends DataManager
                 },
             ]),
         ];
+    }
+
+    /**
+     * @throws \Bitrix\Main\ArgumentException
+     * @throws \Bitrix\Main\ObjectPropertyException
+     * @throws \Bitrix\Main\SystemException
+     * @throws \Exception
+     */
+    public static function deleteInactiveClients(): void
+    {
+        $inactiveClients = static::getList([
+            "filter" => [
+                "<UPDATED_AT" => time() - static::INACTIVE_TIMEOUT,
+            ],
+            "select" => [
+                "UUID",
+            ],
+        ])->fetchAll();
+
+        foreach ($inactiveClients as $inactiveClient) {
+            static::delete($inactiveClient["UUID"]);
+        }
     }
 }

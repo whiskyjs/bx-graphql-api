@@ -8,6 +8,7 @@ use Machaon\Std\Base\Singleton;
 use GraphQL\GraphQL;
 use GraphQL\Type\Schema;
 
+use WJS\API\Entities\SubscriberTable;
 use WJS\API\GraphQL\Schema\Builder;
 use WJS\API\MetaInfo;
 
@@ -51,13 +52,16 @@ class Server extends Singleton
     }
 
     /**
-     * @throws \Bitrix\Main\ArgumentNullException
-     * @throws \Bitrix\Main\ArgumentOutOfRangeException
+     * @throws \Bitrix\Main\ArgumentException
+     * @throws \Bitrix\Main\ObjectPropertyException
+     * @throws \Bitrix\Main\SystemException
      * @throws \JsonException
      */
     public function handleRequest(): void
     {
-        // $this->authorizeRequest();
+        $this->authorizeRequest();
+
+        $this->onBeforeEvaluation();
 
         $schema = new Schema(Builder::getInstance()->getSchema());
 
@@ -81,9 +85,25 @@ class Server extends Singleton
             ];
         }
 
+        $this->onAfterEvaluation();
+
         header('Content-Type: application/json');
 
         /** @noinspection PhpUnhandledExceptionInspection */
         die(to_json($output));
+    }
+
+    /**
+     * @throws \Bitrix\Main\ArgumentException
+     * @throws \Bitrix\Main\ObjectPropertyException
+     * @throws \Bitrix\Main\SystemException
+     */
+    protected function onBeforeEvaluation(): void
+    {
+        SubscriberTable::deleteInactiveClients();
+    }
+
+    protected function onAfterEvaluation(): void
+    {
     }
 }

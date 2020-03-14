@@ -6,17 +6,35 @@ use GraphQL\Type\Definition\EnumType;
 
 class ModuleMainEventsType extends EnumType
 {
-    const EVENT_ON_PAGE_START = "OnPageStart";
+    const EVENT_ON_BEFORE_EVENT_ADD = "OnBeforeEventAdd";
+    const EVENT_ON_BEFORE_EVENT_SEND = "OnBeforeEventSend";
 
     public function __construct()
     {
         parent::__construct([
-            'name' => "ModuleMainEventsType",
+            'name' => "ModuleMainEvents",
             'description' => "Поддерживаемые события главного модуля.",
             'values' => [
-                static::EVENT_ON_PAGE_START => [
-                    'value' => self::EVENT_ON_PAGE_START,
-                    'description' => 'OnPageStart',
+                static::EVENT_ON_BEFORE_EVENT_ADD => [
+                    'value' => self::EVENT_ON_BEFORE_EVENT_ADD,
+                    'description' => self::EVENT_ON_BEFORE_EVENT_ADD,
+                    'args' => [
+                        "event",
+                        "siteId",
+                        "arFields",
+                        "templateId",
+                        "files",
+                        "languageId",
+                    ],
+                ],
+                static::EVENT_ON_BEFORE_EVENT_SEND => [
+                    'value' => self::EVENT_ON_BEFORE_EVENT_SEND,
+                    'description' => self::EVENT_ON_BEFORE_EVENT_SEND,
+                    'args' => [
+                        "arFields",
+                        "arTemplate",
+                        "context",
+                    ],
                 ],
             ]
         ]);

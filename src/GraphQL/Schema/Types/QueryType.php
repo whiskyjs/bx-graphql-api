@@ -76,7 +76,7 @@ class QueryType extends ExtensibleObjectType
                     "resolve" => function (array $data, array $args = [], ?array $context = null): array {
                         return [];
                     }
-                ]
+                ],
             ];
         };
     }

@@ -25,7 +25,16 @@ Loc::loadMessages(server()->getDocumentRoot() . BX_ROOT . "/modules/main/options
 Loc::loadMessages(__FILE__);
 
 $arAllOptions = [
-    ["enable", Loc::getMessage("WJS_OPTION_ENABLE"), ["checkbox"]],
+    ["enable", Loc::getMessage("WJS_OPTION_ENABLE"), [
+        "type" => "checkbox",
+    ]],
+    ["proxy_server", Loc::getMessage("WJS_OPTION_PROXY_SERVER"), [
+        "type" => "text",
+    ]],
+    ["origin", Loc::getMessage("WJS_OPTION_ORIGIN"), [
+        "type" => "text",
+        "required" => true,
+    ]],
 ];
 
 $aTabs = [
@@ -74,21 +83,21 @@ if ((request()->getRequestMethod() === "POST") && ($rights === "W") && check_bit
     $tabControl->BeginNextTab();
     foreach ($arAllOptions as $arOption) {
         $value = \COption::GetOptionString($module_id, $arOption[0]);
-        $type = $arOption[2];
+        $config = $arOption[2];
         ?>
         <tr>
             <td
                 width="40%"
                 nowrap
                 class="<?= classlist([
-                    "adm-detail-valign-top" => $type[0] == "textarea",
+                    "adm-detail-valign-top" => $config["type"] == "textarea",""
                 ]) ?>">
                 <label
                     for="<?= htmlspecialcharsbx($arOption[0]) ?>">
                     <?= $arOption[1] ?>
                 </label>
             <td width="60%">
-                <? if ($type[0] == "checkbox"): ?>
+                <? if ($config["type"] == "checkbox"): ?>
                     <input
                         type="checkbox"
                         name="<?= htmlspecialcharsbx($arOption[0]) ?>"
@@ -96,32 +105,41 @@ if ((request()->getRequestMethod() === "POST") && ($rights === "W") && check_bit
                         value="Y"
                         <?= attrs([
                             "checked" => $value == "Y",
+                            "required" => $config["required"] ?? false,
                         ]) ?>
                     >
-                <? elseif ($type[0] == "text"): ?>
+                <? elseif ($config["type"] == "text"): ?>
                     <input
                         type="text"
-                        size="<?= $type[1] ?>"
+                        size="<?= $config["size"] ?>"
                         maxlength="255"
                         value="<?= htmlspecialcharsbx($value) ?>"
                         name="<?= htmlspecialcharsbx($arOption[0]) ?>"
                         id="<?= htmlspecialcharsbx($arOption[0]) ?>"
+                        <?= attrs([
+                            "required" => $config["required"] ?? false,
+                        ]) ?>
                     >
-                <? elseif ($type[0] == "textarea"): ?>
+                <? elseif ($config["type"] == "textarea"): ?>
                     <textarea
-                        rows="<?= $type[1] ?>"
-                        cols="<?= $type[2] ?>"
+                        rows="<?= $config["rows"] ?>"
+                        cols="<?= $config["cols"] ?>"
                         name="<?= htmlspecialcharsbx($arOption[0]) ?>"
-                        id="<?= htmlspecialcharsbx($arOption[0]) ?>"><?= htmlspecialcharsbx($value) ?></textarea>
-                <? elseif ($type[0] == "selectbox"): ?>
+                        id="<?= htmlspecialcharsbx($arOption[0]) ?>"
+                        <?= attrs([
+                            "required" => $config["required"] ?? false,
+                        ]) ?>
+                    ><?= htmlspecialcharsbx($value) ?></textarea>
+                <? elseif ($config["type"] == "select"): ?>
                     <select
                         name="<?= htmlspecialcharsbx($arOption[0]) ?>"
                     >
-                        <? foreach ($type[1] as $key => $title): ?>
+                        <? foreach ($config["options"] as $key => $title): ?>
                             <option
                                 value="<?= $key ?>"
                                 <?= attrs([
                                     "selected" => $value == $key,
+                                    "required" => $config["required"] ?? false,
                                 ]) ?>
                             >
                                 <?= htmlspecialcharsbx($title) ?>

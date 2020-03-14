@@ -3,27 +3,31 @@
 namespace WJS\API\GraphQL\Schema\Types;
 
 use GraphQL\Type\Definition\InputObjectType;
+
 use WJS\API\GraphQL\Schema\Type;
 
-class ModuleEventSetTypeInput extends InputObjectType
+class ModuleEventSetInput extends InputObjectType
 {
-    const MODULE_MAIN = "main";
-    const MODULE_IBLOCK = "iblock";
-
     public function __construct()
     {
         parent::__construct([
-            "name" => "ModuleEventSetTypeInput",
+            "name" => "ModuleEventSetInput",
             "fields" => function () {
                 return [
-                    static::MODULE_MAIN => [
+                    EventInspectorModulesType::MAIN => [
                         "type" => Type::listOf(Type::nonNull(Type::getInstance(ModuleMainEventsType::class))),
                         "resolve" => function (array $data, array $args = [], ?array $context = null): array {
                             return [];
                         }
                     ],
-                    static::MODULE_IBLOCK => [
-                        "type" => Type::listOf(Type::nonNull(Type::getInstance(ModuleIBlockEventsType::class))),
+                    EventInspectorModulesType::IBLOCK => [
+                        "type" => Type::listOf(Type::nonNull(Type::getInstance(ModuleIblockEventsType::class))),
+                        "resolve" => function (array $data, array $args = [], ?array $context = null): array {
+                            return [];
+                        }
+                    ],
+                    EventInspectorModulesType::FORM => [
+                        "type" => Type::listOf(Type::nonNull(Type::getInstance(ModuleFormEventsType::class))),
                         "resolve" => function (array $data, array $args = [], ?array $context = null): array {
                             return [];
                         }
