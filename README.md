@@ -4,19 +4,19 @@
 
 Модуль, реализующий расширяемый API на GraphQL в БУС.
 
-Требует PHP 7.2 или выше.
+Требует PHP 7.1 или выше и Composer.
 
 Является зависимостью [bx-inspector](https://github.com/whiskyjs/bx-inspector).
 
 ### Установка
 
-Из папки bitrix/modules в терминале:
+Находясь в `bitrix/modules`, вводим в терминале:
 
 ```bash
-curl -L https://github.com/whiskyjs/bx-graphql-api/tarball/develop | tar xz && mv $(find . -maxdepth 1 -type d -name '[^.]?*' -printf %f -quit) wjs.api
+mkdir wjs.api && cd wjs.api && curl -L https://github.com/whiskyjs/bx-graphql-api/tarball/develop | tar xz && tmpdir=$(find . -maxdepth 1 -type d -name '[^.]?*' -printf %f -quit) && shopt -s dotglob && mv $tmpdir/* . && rmdir $tmpdir && composer install
 ```
 
-Затем установка через админку.
+Затем обычная установка через админку. Появится страница с опциями и GraphQL-запросом.
 
 ### Лицензия
 
