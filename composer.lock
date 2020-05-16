@@ -217,7 +217,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.machaon-dev.ru:machaon/std.git",
-                "reference": "fcc0cd44c84a9e3f7da921334cec7b95e32ea0d8"
+                "reference": "73e9d3c41f40e124d479e944eead133e52c873ac"
             },
             "require": {
                 "ext-json": "*",
@@ -261,7 +261,7 @@
                     "phpstan analyse src tests"
                 ],
                 "lint": [
-                    "phpcs --standard=PSR2 src tests"
+                    "phpcs --standard=PSR2 -s src tests"
                 ]
             },
             "license": [
@@ -274,7 +274,7 @@
                 }
             ],
             "description": "A set of universal classes and functions to use in Bitrix-based projects",
-            "time": "2020-01-27T11:05:00+00:00"
+            "time": "2020-05-16T14:47:06+00:00"
         },
         {
             "name": "monolog/monolog",
