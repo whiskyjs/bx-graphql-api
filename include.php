@@ -9,11 +9,26 @@ use WJS\API\Path;
 require_once __DIR__ . "/bootstrap/autoload.php";
 
 $registry = Registry::getInstance();
-$registry
-    ->set("machaon.std.config.files", [
-        "default" => Path::getModuleRelativeDir() . "/config.php",
-        "local" => Path::getModuleRelativeDir() . "/config.local.php",
-    ])
-    ->set("machaon.std.logger.dir", Path::getModuleRelativeDir() . "/logs");
+
+$registry->apply("machaon.std.config.files", function ($current) {
+    if (isset($current)) {
+        $files = $current;
+    } else {
+        try {
+            $files = config("machaon.std.config.files");
+        } catch (\Throwable $err) {
+            $config  = require "vendor/machaon/std/src/config.php";
+            $files = $config["machaon"]["std"]["config"]["files"];
+        }
+    }
+
+    return array_merge([
+        "wjs.api" => Path::getModuleRelativeDir() . "/config.php",
+        "wjs.api.local" => Path::getModuleRelativeDir() . "/config.local.php",
+    ], $files);
+});
+
+// Сбрасываем текущую конфигурацию, чтобы config() обновила кеш
+$registry->remove("config");
 
 Loc::loadMessages(Path::getAbsolutePath("include.php"));

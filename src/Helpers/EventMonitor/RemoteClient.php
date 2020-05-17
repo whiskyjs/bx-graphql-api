@@ -61,6 +61,10 @@ class RemoteClient extends Singleton
      */
     public function broadcastEvent(array $payload): void
     {
+        if (!$this->shouldBroadcastEvents()) {
+            return;
+        }
+
         try {
             $metadata = $this->getMetadata($payload);
 
@@ -156,5 +160,13 @@ class RemoteClient extends Singleton
         }
 
         return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function shouldBroadcastEvents(): bool
+    {
+        return (bool) request()->getCookieRaw(config("wjs.api.event_monitor.cookie_name"));
     }
 }

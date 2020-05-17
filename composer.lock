@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dcf9c02cb8041be912e967e81e4d10ee",
+    "content-hash": "f8046183859abede1da247920a9fd942",
     "packages": [
         {
             "name": "doctrine/collections",
@@ -138,47 +138,6 @@
             "time": "2020-01-07T09:12:07+00:00"
         },
         {
-            "name": "haydenpierce/class-finder",
-            "version": "v0.4.0.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://gitlab.com/hpierce1102/ClassFinder.git",
-                "reference": "bc50571d29dd7590feb445d691f32eec48fe8c34"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/hpierce1102%2FClassFinder/repository/archive.zip?sha=bc50571d29dd7590feb445d691f32eec48fe8c34",
-                "reference": "bc50571d29dd7590feb445d691f32eec48fe8c34",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=5.3"
-            },
-            "require-dev": {
-                "mikey179/vfsstream": "^1.6",
-                "phpunit/phpunit": "4.8.36"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "HaydenPierce\\ClassFinder\\": "src/",
-                    "HaydenPierce\\ClassFinder\\UnitTest\\": "test/unit"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Hayden Pierce",
-                    "email": "hayden@haydenpierce.com"
-                }
-            ],
-            "time": "2019-01-01T03:10:02+00:00"
-        },
-        {
             "name": "jakeasmith/http_build_url",
             "version": "1.0.1",
             "source": {
@@ -213,11 +172,11 @@
         },
         {
             "name": "machaon/std",
-            "version": "dev-develop",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.machaon-dev.ru:machaon/std.git",
-                "reference": "73e9d3c41f40e124d479e944eead133e52c873ac"
+                "reference": "44447c248029e1f33f79e8f050fdb85768bceb33"
             },
             "require": {
                 "ext-json": "*",
@@ -274,7 +233,7 @@
                 }
             ],
             "description": "A set of universal classes and functions to use in Bitrix-based projects",
-            "time": "2020-05-16T14:47:06+00:00"
+            "time": "2020-05-17T08:54:23+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3360,7 +3319,6 @@
     "stability-flags": {
         "machaon/std": 20,
         "webonyx/graphql-php": 20,
-        "haydenpierce/class-finder": 20,
         "phpstan/phpstan": 20,
         "squizlabs/php_codesniffer": 20
     },

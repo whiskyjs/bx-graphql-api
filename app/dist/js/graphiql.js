@@ -246,19 +246,15 @@ function (_StdApp) {
         }
 
         var graphQLFetcher = function graphQLFetcher(payload) {
-          if (Object(_std_guards__WEBPACK_IMPORTED_MODULE_17__["isJsonMap"])(_this2.config) && Object(_std_guards__WEBPACK_IMPORTED_MODULE_17__["isJsonMap"])(_this2.config.graphql)) {
-            return fetch(String(_this2.config.graphql.endpoint), {
-              method: "post",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(payload)
-            }).then(function (response) {
-              return response.json();
-            });
-          } else {
-            return false;
-          }
+          return fetch(String(_this2.config.wjs.api.graphql.endpoint), {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          }).then(function (response) {
+            return response.json();
+          });
         };
 
         react_dom__WEBPACK_IMPORTED_MODULE_14___default.a.render(react__WEBPACK_IMPORTED_MODULE_13___default.a.createElement(graphiql__WEBPACK_IMPORTED_MODULE_15___default.a, {

@@ -22,15 +22,11 @@ export class App extends StdApp {
             }
 
             const graphQLFetcher = (payload: any): Promise<Response>|boolean => {
-                if (isJsonMap(this.config) && isJsonMap(this.config.graphql)) {
-                    return fetch(String(this.config.graphql.endpoint), {
-                        method: "post",
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify(payload),
-                    }).then(response => response.json());
-                } else {
-                    return false;
-                }
+                return fetch(String(this.config.wjs.api.graphql.endpoint), {
+                    method: "post",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(payload),
+                }).then(response => response.json());
             };
 
             ReactDOM.render(

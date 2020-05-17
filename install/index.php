@@ -9,8 +9,6 @@ use Bitrix\Main\Context;
 use Bitrix\Main\EventManager;
 use Bitrix\Main\Localization\Loc;
 
-// use HaydenPierce\ClassFinder\ClassFinder;
-
 use WJS\API\GraphQL\Schema\Types\ModuleEventSetInput;
 
 Loc::loadMessages(__FILE__);
