@@ -4,7 +4,10 @@ namespace WJS\API\GraphQL\Schema\Types;
 
 use GraphQL\Type\Definition\EnumType;
 
-class ModuleIblockEventsType extends EnumType
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
+class ModuleIBlockEventsType extends EnumType
 {
     const EVENT_BEFORE_ELEMENT_UPDATE = "OnBeforeIBlockElementUpdate";
     const EVENT_AFTER_ELEMENT_UPDATE = "OnAfterIBlockElementUpdate";

@@ -3,25 +3,22 @@
 namespace WJS\API\GraphQL\Schema\Types;
 
 use GraphQL\Type\Definition\InputObjectType;
-
 use WJS\API\GraphQL\Schema\Type;
 
 /**
  * @package WJS\API\GraphQL\Schema\Types
  */
-class UserFilterInputType extends InputObjectType
+class IBlockElementOptionsFilterInputType extends InputObjectType
 {
     public function __construct()
     {
         parent::__construct([
-            'name' => "UserFilterInput",
+            'name' => "IBlockElementOptionsFilterInputType",
             'fields' => function () {
                 return [
-                    "ID" => [
-                        "type" => Type::id()
-                    ],
-                    "NAME" => [
-                        "type" => Type::string()
+                    "fetch_files" => [
+                        "type" => Type::nonNull(Type::boolean()),
+                        "defaultValue" => false,
                     ],
                 ];
             },

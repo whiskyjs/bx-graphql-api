@@ -9,19 +9,19 @@ use WJS\API\GraphQL\Schema\Type;
 /**
  * @package WJS\API\GraphQL\Schema\Types
  */
-class UserFilterInputType extends InputObjectType
+class KeyMultipleValuePairInputType extends InputObjectType
 {
     public function __construct()
     {
         parent::__construct([
-            'name' => "UserFilterInput",
+            'name' => "KeyMultipleValuePairInputType",
             'fields' => function () {
                 return [
-                    "ID" => [
-                        "type" => Type::id()
+                    "key" => [
+                        "type" => Type::nonNull(Type::string()),
                     ],
-                    "NAME" => [
-                        "type" => Type::string()
+                    "value" => [
+                        "type" => Type::listOf(Type::nonNull(Type::string())),
                     ],
                 ];
             },

@@ -7,7 +7,7 @@ use WJS\API\GraphQL\Schema\Type;
 /**
  * @package WJS\API\GraphQL\Schema\Types
  */
-class EventNameType extends ExtensibleObjectType
+class IBlockFieldType extends ExtensibleObjectType
 {
     /**
      * @return array|callable
@@ -16,11 +16,11 @@ class EventNameType extends ExtensibleObjectType
     {
         return function () {
             return [
-                "module" => [
-                    "type" => Type::string(),
-                    "resolve" => function (array $data, array $args = [], ?array $context = null): array {
-                        return [];
-                    }
+                "CODE" => [
+                    "type" => Type::nonNull(Type::string()),
+                ],
+                "VALUE" => [
+                    "type" => Type::nonNull(Type::string()),
                 ],
             ];
         };

@@ -4,6 +4,9 @@ namespace WJS\API\GraphQL\Schema\Types;
 
 use WJS\API\GraphQL\Schema\Type;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 class EvaluationResultType extends ExtensibleObjectType
 {
     /**

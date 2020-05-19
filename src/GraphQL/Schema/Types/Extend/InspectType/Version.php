@@ -11,6 +11,9 @@ use WJS\API\GraphQL\Schema\Type;
 use WJS\API\GraphQL\Schema\Types\InspectType;
 use WJS\API\MetaInfo;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types\Extend\InspectType
+ */
 class Version extends Singleton implements Field
 {
     /**

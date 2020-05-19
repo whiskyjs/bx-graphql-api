@@ -13,6 +13,9 @@ use WJS\API\GraphQL\Schema\Types\EvaluationLanguageType;
 use WJS\API\GraphQL\Schema\Types\EvaluationResultType;
 use WJS\API\Helpers\PHP\Evaluator as EvaluatorPHP;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types\Extend\InspectType
+ */
 class Evaluate extends Singleton implements Field
 {
     /**

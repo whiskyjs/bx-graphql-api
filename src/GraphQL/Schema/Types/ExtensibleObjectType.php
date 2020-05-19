@@ -6,6 +6,9 @@ use GraphQL\Type\Definition\ObjectType;
 
 use WJS\API\GraphQL\Exceptions\SchemaException;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 abstract class ExtensibleObjectType extends ObjectType
 {
     /**

@@ -32,6 +32,10 @@ class Server extends Singleton
             $login = server()->get("PHP_AUTH_USER");
             $password = server()->get("PHP_AUTH_PW");
 
+            if (!$login && !$password) {
+                [$login, $password] = $this->getCustomHeaderCredentials();
+            }
+
             $providedCredentials = !(empty($login) && !empty($password));
 
             if ($providedCredentials) {
@@ -44,7 +48,7 @@ class Server extends Singleton
 
             if (!isset($canAccess) || !$canAccess) {
                 header('HTTP/1.1 401 Authorization Required');
-                header('WWW-Authenticate: Basic realm="Authorization Required"');
+                header('WWW-Authenticate: Basic realm="401"');
                 echo "¯\_(ツ)_/¯";
                 die(401);
             }
@@ -105,5 +109,19 @@ class Server extends Singleton
 
     protected function onAfterEvaluation(): void
     {
+    }
+
+    /**
+     * @return array
+     */
+    private function getCustomHeaderCredentials(): array
+    {
+        $authHeader = request()->getHeader(config("wjs.api.graphql.authorization_header"));
+
+        if ($authHeader && preg_match("#^Basic (.+)$#", $authHeader, $matches)) {
+            return explode(":", base64_decode($matches[1]));
+        }
+
+        return [];
     }
 }

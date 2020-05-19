@@ -4,6 +4,9 @@ namespace WJS\API\GraphQL\Schema\Types;
 
 use GraphQL\Type\Definition\EnumType;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 class ModuleMainEventsType extends EnumType
 {
     const EVENT_ON_BEFORE_EVENT_ADD = "OnBeforeEventAdd";

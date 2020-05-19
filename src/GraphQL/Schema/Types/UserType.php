@@ -5,6 +5,9 @@ namespace WJS\API\GraphQL\Schema\Types;
 use WJS\API\GraphQL\Schema\Type;
 use WJS\API\Resolvers\Group\Query as GroupQuery;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 class UserType extends ExtensibleObjectType
 {
     /**

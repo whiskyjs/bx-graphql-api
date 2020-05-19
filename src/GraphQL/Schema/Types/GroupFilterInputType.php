@@ -5,6 +5,9 @@ namespace WJS\API\GraphQL\Schema\Types;
 use GraphQL\Type\Definition\InputObjectType;
 use WJS\API\GraphQL\Schema\Type;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 class GroupFilterInputType extends InputObjectType
 {
     public function __construct()

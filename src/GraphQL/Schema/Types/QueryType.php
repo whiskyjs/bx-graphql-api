@@ -6,6 +6,9 @@ use WJS\API\GraphQL\Schema\Type;
 use WJS\API\Resolvers\Group\Query as GroupQuery;
 use WJS\API\Resolvers\User\Query as UserQuery;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 class QueryType extends ExtensibleObjectType
 {
     /**
@@ -61,7 +64,6 @@ class QueryType extends ExtensibleObjectType
                             "type" => Type::getInstance(GroupFilterInputType::class),
                             "defaultValue" => [],
                         ],
-
                     ],
                     "resolve" => function (array $data, array $args = [], ?array $context = null): array {
                         return first_of(GroupQuery::get(
@@ -73,6 +75,12 @@ class QueryType extends ExtensibleObjectType
                 ],
                 "inspect" => [
                     "type" => Type::getInstance(InspectType::class),
+                    "resolve" => function (array $data, array $args = [], ?array $context = null): array {
+                        return [];
+                    }
+                ],
+                "iblock" => [
+                    "type" => Type::getInstance(IBlockType::class),
                     "resolve" => function (array $data, array $args = [], ?array $context = null): array {
                         return [];
                     }

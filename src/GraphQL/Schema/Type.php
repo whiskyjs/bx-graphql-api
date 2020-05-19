@@ -8,7 +8,6 @@ use GraphQL\Type\Definition\ListOfType;
 use GraphQL\Type\Definition\NonNull;
 use GraphQL\Type\Definition\NullableType;
 
-use WJS\API\GraphQL\Schema\Types\DebugType;
 use WJS\API\GraphQL\Schema\Types\MutationType;
 use WJS\API\GraphQL\Schema\Types\QueryType;
 

@@ -2,11 +2,12 @@
 
 namespace WJS\API\GraphQL\Schema\Types;
 
-use Bitrix\Main\Type\DateTime;
-
 use WJS\API\Entities\SubscriberTable;
 use WJS\API\GraphQL\Schema\Type;
 
+/**
+ * @package WJS\API\GraphQL\Schema\Types
+ */
 class MutationType extends ExtensibleObjectType
 {
     /**
