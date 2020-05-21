@@ -32,7 +32,7 @@ class Query
                 $result[$paramName] = [];
 
                 foreach ($paramValue as $pair) {
-                    $result[$paramName][$pair["key"]] = $pair["value"];
+                    $result[$paramName][$pair["key"]] = from_json($pair["value"]);
                 }
             }
         }
@@ -59,7 +59,7 @@ class Query
                 foreach ($paramValue as $key => $value) {
                     $result[$paramName][] = [
                         "key" => (string )$key,
-                        "value" => (string) $value,
+                        "value" => to_json($value),
                     ];
                 }
             }
