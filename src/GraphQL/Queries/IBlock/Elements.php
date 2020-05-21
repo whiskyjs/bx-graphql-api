@@ -54,6 +54,9 @@ class Elements extends AbstractQuery
                                 "MULTIPLE",
                                 "VALUE",
                                 "DESCRIPTION",
+                                "VALUE_ENUM",
+                                "VALUE_XML_ID",
+                                "VALUE_SORT",
                             ]),
                     ])
             ]);
