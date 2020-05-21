@@ -51,6 +51,8 @@ class IBlockType extends ExtensibleObjectType
                         ],
                     ],
                     'resolve' => function (array $data, array $args = [], ?array $context = null) {
+                        modules(["iblock"]);
+
                         return IBlockElementQuery::getList($args);
                     },
                 ],
