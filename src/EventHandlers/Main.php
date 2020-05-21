@@ -1,6 +1,6 @@
 <?php
 
-namespace WJS\API\Handlers;
+namespace WJS\API\EventHandlers;
 
 use Bitrix\Main\Localization\Loc;
 

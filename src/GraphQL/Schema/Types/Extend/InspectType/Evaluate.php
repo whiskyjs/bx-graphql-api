@@ -11,7 +11,7 @@ use WJS\API\GraphQL\Schema\Type;
 use WJS\API\GraphQL\Schema\Types\InspectType;
 use WJS\API\GraphQL\Schema\Types\EvaluationLanguageType;
 use WJS\API\GraphQL\Schema\Types\EvaluationResultType;
-use WJS\API\Helpers\PHP\Evaluator as EvaluatorPHP;
+use WJS\API\Resolvers\Inspect\Evaluate\PHP\Evaluator as EvaluatorPHP;
 
 /**
  * @package WJS\API\GraphQL\Schema\Types\Extend\InspectType

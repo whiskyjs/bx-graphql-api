@@ -126,7 +126,7 @@ class wjs_api extends \CModule
             "main",
             "OnBuildGlobalMenu",
             $this->MODULE_ID,
-            \WJS\API\Handlers\Main::class,
+            \WJS\API\EventHandlers\Main::class,
             "onBuildGlobalMenu"
         );
 
@@ -134,7 +134,7 @@ class wjs_api extends \CModule
             "main",
             "OnEpilog",
             $this->MODULE_ID,
-            \WJS\API\Handlers\Main::class,
+            \WJS\API\EventHandlers\Main::class,
             "onEpilog"
         );
 
@@ -156,7 +156,7 @@ class wjs_api extends \CModule
                 $module,
                 $event,
                 $this->MODULE_ID,
-                \WJS\API\Handlers\EventMonitor\EventProcessor::class,
+                \WJS\API\EventHandlers\EventProcessor::class,
                 "handleEvent",
                 100,
                 "",
@@ -182,7 +182,7 @@ class wjs_api extends \CModule
                 $module,
                 $event,
                 $this->MODULE_ID,
-                \WJS\API\Handlers\EventMonitor\EventProcessor::class,
+                \WJS\API\EventHandlers\EventProcessor::class,
                 "handleEvent",
                 "",
                 [[
@@ -241,7 +241,7 @@ class wjs_api extends \CModule
             "main",
             "OnBuildGlobalMenu",
             $this->MODULE_ID,
-            \WJS\API\Handlers\Main::class,
+            \WJS\API\EventHandlers\Main::class,
             "onBuildGlobalMenu"
         );
 
@@ -249,7 +249,7 @@ class wjs_api extends \CModule
             "main",
             "OnEpilog",
             $this->MODULE_ID,
-            \WJS\API\Handlers\Main::class,
+            \WJS\API\EventHandlers\Main::class,
             "onEpilog"
         );
 

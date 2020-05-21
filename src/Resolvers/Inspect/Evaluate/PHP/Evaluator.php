@@ -1,6 +1,6 @@
 <?php
 
-namespace WJS\API\Helpers\PHP;
+namespace WJS\API\Resolvers\Inspect\Evaluate\PHP;
 
 class Evaluator
 {

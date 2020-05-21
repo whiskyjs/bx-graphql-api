@@ -1,6 +1,6 @@
 <?php
 
-namespace WJS\API\Helpers\EventMonitor;
+namespace WJS\API\EventMonitor;
 
 use Bitrix\Main\ArgumentNullException;
 use Bitrix\Main\ArgumentOutOfRangeException;

@@ -1,9 +1,9 @@
 <?php
 // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 
-namespace WJS\API\Handlers\EventMonitor;
+namespace WJS\API\EventHandlers;
 
-use WJS\API\Helpers\EventMonitor\RemoteClient;
+use WJS\API\EventMonitor\RemoteClient;
 
 class EventProcessor
 {
