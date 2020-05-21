@@ -2,6 +2,9 @@
 
 namespace WJS\API\Resolvers\IBlock\Elements;
 
+use WJS\API\Resolvers\ValueDecoder;
+use WJS\API\Resolvers\ValueEncoder;
+
 class Query
 {
     /**
@@ -32,7 +35,7 @@ class Query
                 $result[$paramName] = [];
 
                 foreach ($paramValue as $pair) {
-                    $result[$paramName][$pair["key"]] = from_json($pair["value"]);
+                    $result[$paramName][$pair["key"]] = ValueDecoder::decode($pair["value"]);
                 }
             }
         }
@@ -59,57 +62,13 @@ class Query
                 foreach ($paramValue as $key => $value) {
                     $result[$paramName][] = [
                         "key" => (string )$key,
-                        "value" => to_json($value),
+                        "value" => ValueEncoder::encode($value),
                     ];
                 }
             }
         }
 
         return $result;
-    }
-
-    /**
-     * @param mixed $value
-     * @param array $property
-     * @return string/null
-     * @throws \JsonException
-     */
-    public static function encodePropertyValue($value, array $property): ?string
-    {
-        return to_json($value);
-    }
-
-    /**
-     * @param $value
-     * @param array $property
-     * @return mixed
-     * @throws \JsonException
-     */
-    public static function decodePropertyValue($value, array $property)
-    {
-        return from_json($value);
-    }
-
-    /**
-     * @param string $code
-     * @param mixed $value
-     * @return string/null
-     * @throws \JsonException
-     */
-    public static function encodeFieldValue(string $code, $value): ?string
-    {
-        return to_json($value);
-    }
-
-    /**
-     * @param string $code
-     * @param string $value
-     * @return mixed
-     * @throws \JsonException
-     */
-    public static function decodeFieldValue(string $code, string $value)
-    {
-        return from_json($value);
     }
 
     /**
@@ -148,7 +107,7 @@ class Query
 
                                 $fields[str_replace("~", "", $k)] = array_map(function ($v) use ($property, $k) {
                                     if ($k === "~VALUE") {
-                                        return static::encodePropertyValue($v, $property);
+                                        return ValueEncoder::encode($v);
                                     } else {
                                         return (string) $v;
                                     }
@@ -161,7 +120,7 @@ class Query
                     default:
                         $encodedElement["fields"][] = [
                             "CODE" => (string) $k,
-                            "VALUE" => static::encodeFieldValue($k, $v),
+                            "VALUE" => ValueEncoder::encode($v),
                         ];
                         break;
                 }
@@ -188,10 +147,7 @@ class Query
                 switch ($key) {
                     case "fields":
                         foreach ($value as $field) {
-                            $decodedElement[$field["CODE"]] = static::decodeFieldValue(
-                                $field["CODE"],
-                                $field["VALUE"]
-                            );
+                            $decodedElement[$field["CODE"]] = ValueDecoder::decode($field["VALUE"]);
                         }
                         break;
                     case "properties":
@@ -201,7 +157,7 @@ class Query
 
                         foreach ($value as $property) {
                             $property["VALUE"] = array_map(function ($value) use ($property) {
-                                return static::decodePropertyValue($value, $property);
+                                return ValueDecoder::decode($value);
                             }, $property["VALUE"]);
 
                             if ($property["MULTIPLE"] !== "Y") {
