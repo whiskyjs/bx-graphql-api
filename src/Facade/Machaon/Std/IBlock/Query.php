@@ -1,6 +1,6 @@
 <?php
 
-namespace WJS\API\Facade\Std\IBlock;
+namespace WJS\API\Facade\Machaon\Std\IBlock;
 
 use Machaon\Std\Registry;
 
@@ -10,7 +10,7 @@ use WJS\API\GraphQL\Queries\IBlock\Elements as IBlockElements;
 use WJS\API\Resolvers\IBlock\Elements\Query as IBlockElementResolver;
 
 /**
- * @package WJS\API\Facade\Std\IBlock
+ * @package WJS\API\Facade\Machaon\Std\IBlock
  */
 class Query
 {
