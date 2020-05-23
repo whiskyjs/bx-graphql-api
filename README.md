@@ -8,6 +8,47 @@
 
 Является зависимостью [bx-inspector](https://github.com/whiskyjs/bx-inspector).
 
+### Но зачем?
+
+![](https://i.imgur.com/QrxCvWn.png)
+
+Помимо стандартных плюсов и минусов GraphQL по сравнению с, например, SOAP или JSON-RPC, модуль предоставляет фасады для методов библиотеки `machaon/std`, позволяющие элементарно реализовывать защищенный и типобезопасный двухсторонний обмен данными между различными площадками.
+
+Например, это - локальный `getList()`:
+```php
+$rows = \Machaon\Std\IBlock\Query::getElements([
+    "filter" => [
+        "IBLOCK_ID" => 1,
+        "ACTIVE" => "Y",
+        "!PROPERTY_FLAG" => false,
+    ],
+    "page" => [
+        "limit" => 10,
+    ],
+]);
+```
+
+А это - удалённый:
+```php
+$rows = \WJS\API\Facade\Machaon\Std\IBlock\Query::getElements([
+    "filter" => [
+        "IBLOCK_ID" => 1,
+        "ACTIVE" => "Y",
+        "!PROPERTY_FLAG" => false,
+    ],
+    "page" => [
+        "limit" => 10,
+    ],
+    "endpoint" => [
+        "url" => "http://host",
+        "login" => "username",
+        "password" => 'pa$$w0rd',
+    ],
+]);
+```
+
+Схема GraphQL и набор фасадов будут расширяться по мере необходимости.
+
 ### Установка
 
 Находясь в `bitrix/modules`, вводим в терминале:
