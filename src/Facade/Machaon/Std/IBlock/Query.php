@@ -21,7 +21,7 @@ class Query
      */
     public static function getElements(array $args = []): array
     {
-        $clientOptions = $args["endpoint"] ?? Registry::getInstance()->get("wjs.api.client.endpoint", []);
+        $clientOptions = $args["endpoint"] ?? config("wjs.api.client.endpoint");
 
         unset($args["endpoint"]);
 
