@@ -52,6 +52,7 @@ class Elements extends AbstractQuery
                                 "PROPERTY_TYPE",
                                 "USER_TYPE",
                                 "MULTIPLE",
+                                "WITH_DESCRIPTION",
                                 "VALUE",
                                 "DESCRIPTION",
                                 "VALUE_ENUM",

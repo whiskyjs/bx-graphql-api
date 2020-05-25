@@ -94,6 +94,7 @@ class Query
                                 "ID" => (int) $property["ID"],
                                 "CODE" => (string) $code,
                                 "PROPERTY_TYPE" => (string) $property["PROPERTY_TYPE"],
+                                "WITH_DESCRIPTION" => (string) $property["WITH_DESCRIPTION"],
                                 "USER_TYPE" => $property["USER_TYPE"] ?: null,
                                 "MULTIPLE" => $property["MULTIPLE"],
                             ];

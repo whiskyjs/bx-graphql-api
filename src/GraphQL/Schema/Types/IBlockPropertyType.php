@@ -31,6 +31,9 @@ class IBlockPropertyType extends ExtensibleObjectType
                 "MULTIPLE" => [
                     "type" => Type::nonNull(Type::string()),
                 ],
+                "WITH_DESCRIPTION" => [
+                    "type" => Type::nonNull(Type::string()),
+                ],
                 "VALUE" => [
                     "type" => Type::listOf(Type::string()),
                 ],
