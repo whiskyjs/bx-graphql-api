@@ -11,8 +11,8 @@ class Query
      * @var string[]
      */
     private static $valueKeys = [
-        "~VALUE",
-        "~DESCRIPTION",
+        "VALUE",
+        "DESCRIPTION",
         "VALUE_ENUM",
         "VALUE_SORT",
         "VALUE_XML_ID",
@@ -106,8 +106,8 @@ class Query
                                     $value = $property[$k];
                                 }
 
-                                $fields[str_replace("~", "", $k)] = array_map(function ($v) use ($property, $k) {
-                                    if ($k === "~VALUE") {
+                                $fields[$k] = array_map(function ($v) use ($property, $k) {
+                                    if ($k === "VALUE") {
                                         return ValueEncoder::encode($v);
                                     } else {
                                         return (string) $v;
