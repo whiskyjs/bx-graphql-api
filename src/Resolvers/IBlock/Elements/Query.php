@@ -199,7 +199,7 @@ class Query
     {
         $args = static::decodeParams($params);
 
-        $elements = \Machaon\Std\IBlock\Query::getElements($args);
+        $elements = \Machaon\Std\IBlock\Element\Query::getList($args);
 
         return self::encodeElements($elements);
     }

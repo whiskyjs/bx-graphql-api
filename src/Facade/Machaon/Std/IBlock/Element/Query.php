@@ -1,8 +1,6 @@
 <?php
 
-namespace WJS\API\Facade\Machaon\Std\IBlock;
-
-use Machaon\Std\Registry;
+namespace WJS\API\Facade\Machaon\Std\IBlock\Element;
 
 use WJS\API\GraphQL\Client;
 use WJS\API\GraphQL\Queries\Factory as QueryFactory;
@@ -10,7 +8,7 @@ use WJS\API\GraphQL\Queries\IBlock\Elements as IBlockElements;
 use WJS\API\Resolvers\IBlock\Elements\Query as IBlockElementResolver;
 
 /**
- * @package WJS\API\Facade\Machaon\Std\IBlock
+ * @package WJS\API\Facade\Machaon\Std\IBlock\Element
  */
 class Query
 {
@@ -19,7 +17,7 @@ class Query
      * @return array
      * @throws \Exception
      */
-    public static function getElements(array $args = []): array
+    public static function getList(array $args = []): array
     {
         $clientOptions = $args["endpoint"] ?? config("wjs.api.client.endpoint");
 

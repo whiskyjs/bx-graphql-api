@@ -33,7 +33,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.1.32",
-    "machaon/std": "dev-master",
+    "machaon/std": "dev-develop",
     "phpro/grumphp": "^0.16.2",
     "webonyx/graphql-php": "dev-master",
     "gmostafa/php-graphql-client": "dev-master"

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "300b581ef90760295cb126725da6c642",
+    "content-hash": "9402d6ad583e49477518aebacd90d6db",
     "packages": [
         {
             "name": "doctrine/collections",
@@ -415,11 +415,11 @@
         },
         {
             "name": "machaon/std",
-            "version": "dev-master",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.machaon-dev.ru:machaon/std.git",
-                "reference": "1652116eef396bdfd43f2651d793ce5f6ed6fb4c"
+                "reference": "79eabbcf18bc60223ac230820cc8997fa2cbfcb1"
             },
             "require": {
                 "ext-json": "*",
@@ -476,7 +476,7 @@
                 }
             ],
             "description": "A set of universal classes and functions to use in Bitrix-based projects",
-            "time": "2020-05-25T15:47:02+00:00"
+            "time": "2020-05-30T09:24:23+00:00"
         },
         {
             "name": "monolog/monolog",
