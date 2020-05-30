@@ -419,7 +419,7 @@
             "source": {
                 "type": "git",
                 "url": "git@gitlab.machaon-dev.ru:machaon/std.git",
-                "reference": "79eabbcf18bc60223ac230820cc8997fa2cbfcb1"
+                "reference": "a2b661c1c2a47b9d5c783d150ec441a382c9afd6"
             },
             "require": {
                 "ext-json": "*",
@@ -476,7 +476,7 @@
                 }
             ],
             "description": "A set of universal classes and functions to use in Bitrix-based projects",
-            "time": "2020-05-30T09:24:23+00:00"
+            "time": "2020-05-30T10:29:20+00:00"
         },
         {
             "name": "monolog/monolog",
