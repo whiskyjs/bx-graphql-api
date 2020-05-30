@@ -16,7 +16,7 @@
 
 Например, это - локальный `getList()`:
 ```php
-$rows = \Machaon\Std\IBlock\Query::getElements([
+$rows = \Machaon\Std\IBlock\Element\Query::getList([
     "filter" => [
         "IBLOCK_ID" => 1,
         "ACTIVE" => "Y",
@@ -30,7 +30,7 @@ $rows = \Machaon\Std\IBlock\Query::getElements([
 
 А это - удалённый:
 ```php
-$rows = \WJS\API\Facade\Machaon\Std\IBlock\Query::getElements([
+$rows = \WJS\API\Facade\Machaon\Std\IBlock\Element\Query::getList([
     "filter" => [
         "IBLOCK_ID" => 1,
         "ACTIVE" => "Y",
