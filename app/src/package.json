@@ -19,7 +19,7 @@
     "release": "webpack --config webpack.production.js"
   },
   "dependencies": {
-    "graphiql": "^0.17.5",
+    "graphiql": "^1.4.7",
     "graphql": "^14.5.8",
     "jquery": "^3.4.1"
   },
